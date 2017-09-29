@@ -1,0 +1,48 @@
+{
+  "name": "gateway-version",
+  "version": "1.0.0",
+  "description": "Utility for updating semantic versioning and git tags",
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  },
+  "main": "dist/index.js",
+  "bin": {
+    "gateway-version": "dist/bin/gateway-version.js"
+  },
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "babel src --out-dir dist",
+    "clean": "rimraf dist",
+    "prepublish": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Justin Neff <justin@gatwayapps.com> (http://www.gatewayapps.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-preset-env": "^1.6.0",
+    "eslint": "^4.7.2",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "yargs": "^9.0.1"
+  }
+}
