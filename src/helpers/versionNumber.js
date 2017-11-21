@@ -39,10 +39,8 @@ export function getNewVersionNumber (versionNumber, scope) {
 
 export function increment (input) {
   let value = parseInt(input)
-  console.log(value)
   if (!isNaN(value)) {
     value++
-    console.log(value)
     return value
   } else {
     return false

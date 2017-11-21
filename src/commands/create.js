@@ -51,17 +51,19 @@ export function handler (argv) {
   if (result.newVersionNumber && result.content) {
     fileHelper.writeFile(opts.file, result.content)
 
+    let tagName = `${opts.tagPrefix || ''}${result.newVersionNumber}`
+
     execSync(`git add ${opts.file}`)
     execSync(`git commit -m "${result.newVersionNumber}"`)
-    execSync(`git tag ${opts.tagPrefix || ''}${result.newVersionNumber}`)
+    execSync(`git tag ${tagName}`)
 
     console.log(`Version number changed from ${result.oldVersionNumber} to ${result.newVersionNumber}`)
+    console.log(`Created tag '${tagName}'`)
   }
 }
 
 function loadOptions (argv) {
   var optPath = path.resolve('./gatewayVersion.json')
-  console.log(`Opts path is: ${optPath}`)
   let opts = fileHelper.readJson(optPath) || {}
 
   if (argv.scope) {
@@ -83,8 +85,6 @@ function loadOptions (argv) {
   if (typeof opts.tagPrefix !== 'string') {
     opts.tagPrefix = ''
   }
-
-  console.log(JSON.stringify(opts, null, 2))
 
   if (!opts.scope) {
     throw new Error('scope is required')
